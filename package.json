@@ -1,0 +1,8 @@
+{
+  "name": "googleAnalyticsAB",
+  "version": "0.0.0",
+  "description": "Function to create tests AB using analytics",
+  "main": "index.js",
+  "author": "Renato Cassino",
+  "license": "MIT"
+}
