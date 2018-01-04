@@ -1,8 +1,31 @@
 {
-  "name": "googleAnalyticsAB",
-  "version": "0.0.0",
+  "name": "google-analytics-ab",
+  "version": "0.0.2",
   "description": "Function to create tests AB using analytics",
   "main": "index.js",
   "author": "Renato Cassino",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^3.10.0"
+  },
+  "devDependencies": {
+    "http-server": "^0.10.0",
+    "mocha": "^4.1.0",
+    "sane": "^2.2.0"
+  },
+  "scripts": {
+    "watch": "sane 'npm run babel' --glob='src/**.js'",
+    "start": "http-server",
+    "test": "mocha"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ]
+  }
 }
