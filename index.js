@@ -10,7 +10,7 @@
       this.init(name, percentage, options);
       if(!this._isAlreadySorted()) {
         if(this._sortIsInCurrentTest()) {
-          this.storage[this.name] = this._sortOneOption();
+          this.storage[this.name] = this._sortOneOption().name;
         } else {
           this.storage[this.name] = false;
         }
@@ -59,7 +59,8 @@
       var total = this.options.reduce((op1, op2) => (
         (op1.weight || 1) + (op2.weight || 1)
       ));
-      var sorted = this._randomBetween(0, total);
+
+      var sorted = this._randomBetween(1, total);
 
       for(var i=0,qt=this.options.length; i<qt; i++) {
         sorted -= (this.options[i].weight || 1);

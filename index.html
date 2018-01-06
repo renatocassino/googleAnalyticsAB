@@ -1,5 +1,35 @@
 <html>
 <body>
   <script src="./index.js"></script>
+
+  <div id="my-test">
+    <span>Side: <span id="label"></span></span>
+    <button id="myButton">Clicable</button>
+  </div>
+
+  <script>
+    var myTest = googleAnalyticsAB.create({
+      name: 'MY_TEST',
+      percentage: 100,
+      options: [
+        {
+          name: 'green-button',
+          weight: 1,
+          run: function() {
+            document.getElementById('label').innerHTML = 'SIDE A';
+            document.getElementById('myButton').style.background = '#0F0';
+          }
+        },
+        {
+          name: 'red-button',
+          weight: 1,
+          run: function() {
+            document.getElementById('label').innerHTML = 'SIDE B';
+            document.getElementById('myButton').style.background = '#F00';
+          }
+        }
+      ]
+    });
+  </script>
 </body>
 </html>
