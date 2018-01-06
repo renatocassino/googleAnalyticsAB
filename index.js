@@ -1,5 +1,52 @@
 (function() {
   var googleAnalyticsAB = {
+    storage: typeof localStorage !== 'undefined' ? localStorage : {},
+
+    create: function({
+      name,
+      percentage,
+      options,
+    }) {
+      this.init(name, percentage, options);
+      if(!this._isAlreadySorted()) {
+        if(this._sortIsInCurrentTest()) {
+          this.storage[this.name] = this._sortOneOption();
+        } else {
+          this.storage[this.name] = false;
+        }
+      }
+
+      if(!this.storage[this.name]) return;
+
+      var option = this._getCurrentOption();
+      option.run();
+    },
+
+    init: function(name, percentage, options) {
+      this.name = name;
+      this.percentage = percentage;
+      this.options = options;
+    },
+
+    _getCurrentOption: function() {
+      var alternativeName = this.storage[this.name];
+      for(var i=0, qt=this.options.length; i<qt; i++) {
+        var currentOption = this.options[i];
+        if(currentOption.name === alternativeName) {
+          return currentOption;
+        }
+      }
+    },
+
+    _isAlreadySorted: function() {
+      return !(typeof this.storage[this.name] === 'undefined');
+    },
+
+    _sortIsInCurrentTest: function() {
+      var sorted = this._randomBetween(0, 100);
+      return sorted < this.percentage;
+    },
+
     _randomBetween: function(min, max) {
       return Math.floor(Math.random() * max) + min;
     },

@@ -69,28 +69,38 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({2:[function(require,module,exports) {
-"use strict";
+})({4:[function(require,module,exports) {
+(function() {
+  var googleAnalyticsAB = {
+    _randomBetween: function(min, max) {
+      return Math.floor(Math.random() * max) + min;
+    },
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+    _sortOneOption: function(options) {
+      var total = options.reduce((op1, op2) => (
+        (op1.weight || 1) + (op2.weight || 1)
+      ));
+      var sorted = this._randomBetween(0, total);
 
-(function (root, factory) {
-  debugger;
+      for(var i=0,qt=options.length; i<qt; i++) {
+        sorted -= (options[i].weight || 1);
+        if(sorted <= 0) return options[i];
+      }
+    }
+  }
+
   if (typeof define === 'function' && define.amd) {
     // AMD
-    define('googleAnalyticsAB', [], factory);
-  } else if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) === 'object') {
+    define('googleAnalyticsAB', [], googleAnalyticsAB);
+  } else if (typeof exports === 'object') {
     // CommonJS
-    module.exports = factory();
+    module.exports = googleAnalyticsAB;
   } else {
-    // Browser globals (Note: root is window)
-    root.googleAnalyticsAB = factory();
+    // Browser globals
+    window.googleAnalyticsAB = googleAnalyticsAB;
   }
-})(undefined, function () {
-  return function () {
-    console.log('AB');
-  };
-});
+})();
+
 },{}],0:[function(require,module,exports) {
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -109,7 +119,7 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
-  var ws = new WebSocket('ws://' + window.location.hostname + ':59478/');
+  var ws = new WebSocket('ws://' + window.location.hostname + ':57845/');
   ws.onmessage = function(event) {
     var data = JSON.parse(event.data);
 
@@ -210,4 +220,4 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id)
   });
 }
-},{}]},{},[0,2])
+},{}]},{},[0,4])
