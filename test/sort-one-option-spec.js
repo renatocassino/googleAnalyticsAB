@@ -12,46 +12,46 @@ describe('#sortOneOption', () => {
   });
 
   it('should select first option', () => {
-    var options = [{name: 'a', weight: 1}, {name: 'b', weight: 1}];
+    googleAnalyticsAB.options = [{name: 'a', weight: 1}, {name: 'b', weight: 1}];
     googleAnalyticsAB._randomBetween = function(a,b) { return 1 };
-    assert.equal(googleAnalyticsAB._sortOneOption(options).name, 'a');
+    assert.equal(googleAnalyticsAB._sortOneOption().name, 'a');
   });
 
   it('should select second option', () => {
-    var options = [{name: 'a', weight: 1}, {name: 'b', weight: 1}];
+    googleAnalyticsAB.options = [{name: 'a', weight: 1}, {name: 'b', weight: 1}];
     googleAnalyticsAB._randomBetween = function(a,b) { return 2 };
-    assert.equal(googleAnalyticsAB._sortOneOption(options).name, 'b');
+    assert.equal(googleAnalyticsAB._sortOneOption().name, 'b');
   });
 
   it('should select with multiple options', () => {
-    var options = [
+    googleAnalyticsAB.options = [
       {name: 'a', weight: 1},
       {name: 'b', weight: 1},
       {name: 'c', weight: 1},
       {name: 'd', weight: 1},
     ];
-    googleAnalyticsAB._randomBetween = function(a,b) { return 4 };
-    assert.equal(googleAnalyticsAB._sortOneOption(options).name, 'd');
+    googleAnalyticsAB._randomBetween = function(a, b) { return 4 };
+    assert.equal(googleAnalyticsAB._sortOneOption().name, 'd');
   });
 
   it('should select with different weights', () => {
-    var options = [
+    googleAnalyticsAB.options = [
       {name: 'a', weight: 1},
       {name: 'b', weight: 5},
       {name: 'c', weight: 9},
       {name: 'd', weight: 2},
     ];
 
-    googleAnalyticsAB._randomBetween = function(a,b) { return 6 };
-    assert.equal(googleAnalyticsAB._sortOneOption(options).name, 'b');
+    googleAnalyticsAB._randomBetween = function(a, b) { return 6 };
+    assert.equal(googleAnalyticsAB._sortOneOption().name, 'b');
 
-    googleAnalyticsAB._randomBetween = function(a,b) { return 7 };
-    assert.equal(googleAnalyticsAB._sortOneOption(options).name, 'c');
+    googleAnalyticsAB._randomBetween = function(a, b) { return 7 };
+    assert.equal(googleAnalyticsAB._sortOneOption().name, 'c');
   });
 
   it('should select options with empty weight param', () => {
-    var options = [{name: 'a'}, {name: 'b'}];
-    googleAnalyticsAB._randomBetween = function(a,b) { return 1 };
-    assert.equal(googleAnalyticsAB._sortOneOption(options).name, 'a');
+    googleAnalyticsAB.options = [{name: 'a'}, {name: 'b'}];
+    googleAnalyticsAB._randomBetween = function(a, b) { return 1 };
+    assert.equal(googleAnalyticsAB._sortOneOption().name, 'a');
   });
 });

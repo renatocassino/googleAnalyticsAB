@@ -19,7 +19,11 @@
       if(!this.storage[this.name]) return;
 
       var option = this._getCurrentOption();
-      option.run();
+      if(option && typeof option.run === 'function') {
+        option.run();
+      }
+
+      return this;
     },
 
     init: function(name, percentage, options) {
@@ -51,15 +55,15 @@
       return Math.floor(Math.random() * max) + min;
     },
 
-    _sortOneOption: function(options) {
-      var total = options.reduce((op1, op2) => (
+    _sortOneOption: function() {
+      var total = this.options.reduce((op1, op2) => (
         (op1.weight || 1) + (op2.weight || 1)
       ));
       var sorted = this._randomBetween(0, total);
 
-      for(var i=0,qt=options.length; i<qt; i++) {
-        sorted -= (options[i].weight || 1);
-        if(sorted <= 0) return options[i];
+      for(var i=0,qt=this.options.length; i<qt; i++) {
+        sorted -= (this.options[i].weight || 1);
+        if(sorted <= 0) return this.options[i];
       }
     }
   }
