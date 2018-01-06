@@ -1,6 +1,6 @@
 {
   "name": "google-analytics-ab",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Function to create tests AB using analytics",
   "main": "index.js",
   "author": "Renato Cassino",
@@ -16,7 +16,6 @@
     "sane": "^2.2.0"
   },
   "scripts": {
-    "watch": "sane 'npm run babel' --glob='src/**.js'",
     "start": "http-server",
     "test": "mocha"
   },
