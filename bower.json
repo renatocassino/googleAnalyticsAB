@@ -1,0 +1,23 @@
+{
+  "name": "google-analytics-ab",
+  "description": "Function to create tests AB using analytics",
+  "main": "index.js",
+  "authors": [
+    "Renato Cassino"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "google",
+    "analytics",
+    "ab",
+    "test"
+  ],
+  "homepage": "https://github.com/tacnoman/googleAnalyticsAB",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
