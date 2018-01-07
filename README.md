@@ -12,6 +12,12 @@ $ npm i --save google-analytics-ab
 
 You must have GA script in your page.
 
+```html
+.....
+<script src="https://rawgit.com/tacnoman/googleAnalyticsAB/master/dist/google-analytics-ab.min.js"></script>
+.....
+```
+
 ```js
 
   var myTest = googleAnalyticsAB.create({
