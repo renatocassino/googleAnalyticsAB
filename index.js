@@ -36,6 +36,11 @@
     },
 
     convert: function() {
+      if(typeof ga !== 'function') {
+        console.error('You must have the ga script in your page');
+        return false;
+      }
+
       ga('send', {
         hitType: 'event',
         eventCategory: 'googleAnalyticsAB',
@@ -43,6 +48,8 @@
         eventLabel: this.selectedOption.name, // Aqui eu diferencio se clicou no A ou B
         eventValue: 1,
       });
+
+      return true;
     },
 
     _getCurrentOption: function() {
