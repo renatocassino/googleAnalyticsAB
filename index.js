@@ -20,8 +20,10 @@
       if(!this.storage[this.name]) return;
 
       var option = this._getCurrentOption();
+      this.selectedOption = option;
+
       if(run && typeof run === 'function') {
-        run(option);
+        run.call(this, option);
       }
 
       return this;
@@ -31,6 +33,16 @@
       this.name = name;
       this.percentage = percentage;
       this.options = options;
+    },
+
+    convert: function() {
+      ga('send', {
+        hitType: 'event',
+        eventCategory: 'googleAnalyticsAB',
+        eventAction: this.name,
+        eventLabel: this.selectedOption.name, // Aqui eu diferencio se clicou no A ou B
+        eventValue: 1,
+      });
     },
 
     _getCurrentOption: function() {

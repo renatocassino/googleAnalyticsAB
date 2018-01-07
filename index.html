@@ -8,6 +8,8 @@
   </div>
 
   <script>
+    window.ga = function(_, options){console.log('sent', options);};
+
     var myTest = googleAnalyticsAB.create({
       name: 'MY_TEST',
       percentage: 100,
@@ -23,7 +25,11 @@
       ],
       run: function(option) {
         document.getElementById('label').innerHTML = `SIDE ${option.name}`;
-        document.getElementById('myButton').style.background = option.name === 'green-button' ? '#0F0' : '#F00';
+        var myButton = document.getElementById('myButton');
+        myButton.style.background = option.name === 'green-button' ? '#0F0' : '#F00';
+        myButton.addEventListener('click', function(ev) {
+          this.convert();
+        }.bind(this));
       }
     });
   </script>

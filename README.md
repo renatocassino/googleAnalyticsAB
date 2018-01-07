@@ -10,12 +10,14 @@ $ npm i --save google-analytics-ab
 
 ## Create your own first test
 
+You must have GA script in your page.
+
 ```js
 
   var myTest = googleAnalyticsAB.create({
     name: 'MY_TEST', // Name of your first test
     percentage: 80, // Percentage of users to run in this test
-    
+
     // Alternatives
     options: [
       {
@@ -28,9 +30,16 @@ $ npm i --save google-analytics-ab
       }
     ],
 
-    run: function(option) {
+    // Method called when AB is sorted
+    run: function(option) { // Current option
       document.getElementById('label').innerHTML = `SIDE ${option.name}`;
-      document.getElementById('myButton').style.background = option.name === 'green-button' ? '#0F0' : '#F00';
+      var myButton = document.getElementById('myButton');
+      myButton.style.background = option.name === 'green-button' ? '#0F0' : '#F00';
+
+      // Event onClick in button tested
+      myButton.addEventListener('click', function(ev) {
+        this.convert(); // Method to convert
+      }.bind(this)); // Bind this is important!
     }
   });
 
