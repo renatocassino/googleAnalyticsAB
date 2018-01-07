@@ -1,6 +1,6 @@
 {
   "name": "google-analytics-ab",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Function to create tests AB using analytics",
   "main": "index.js",
   "author": "Renato Cassino",
