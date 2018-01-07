@@ -1,90 +1,86 @@
-// modules are defined as an array
-// [ module function, map of requires ]
-//
-// map of requires is short require name -> numeric require
-//
-// anything defined in a previous bundle is accessed via the
-// orig method which is the require for previous bundles
-
-// eslint-disable-next-line no-global-assign
-require = (function (modules, cache, entry) {
-  // Save the require from previous bundle to this closure if any
-  var previousRequire = typeof require === "function" && require;
-
-  function newRequire(name, jumped) {
-    if (!cache[name]) {
-      if (!modules[name]) {
-        // if we cannot find the module within our internal map or
-        // cache jump to the current global require ie. the last bundle
-        // that was added to the page.
-        var currentRequire = typeof require === "function" && require;
-        if (!jumped && currentRequire) {
-          return currentRequire(name, true);
-        }
-
-        // If there are other bundles on this page the require from the
-        // previous one is saved to 'previousRequire'. Repeat this as
-        // many times as there are bundles until the module is found or
-        // we exhaust the require chain.
-        if (previousRequire) {
-          return previousRequire(name, true);
-        }
-
-        var err = new Error('Cannot find module \'' + name + '\'');
-        err.code = 'MODULE_NOT_FOUND';
-        throw err;
-      }
-      
-      localRequire.resolve = resolve;
-
-      var module = cache[name] = new newRequire.Module;
-
-      modules[name][0].call(module.exports, localRequire, module, module.exports);
-    }
-
-    return cache[name].exports;
-
-    function localRequire(x){
-      return newRequire(localRequire.resolve(x));
-    }
-
-    function resolve(x){
-      return modules[name][1][x] || x;
-    }
-  }
-
-  function Module() {
-    this.bundle = newRequire;
-    this.exports = {};
-  }
-
-  newRequire.Module = Module;
-  newRequire.modules = modules;
-  newRequire.cache = cache;
-  newRequire.parent = previousRequire;
-
-  for (var i = 0; i < entry.length; i++) {
-    newRequire(entry[i]);
-  }
-
-  // Override the current require with this new one
-  return newRequire;
-})({4:[function(require,module,exports) {
 (function() {
   var googleAnalyticsAB = {
+    storage: typeof localStorage !== 'undefined' ? localStorage : {},
+
+    create: function(config) {
+      this.init(name, percentage, options);
+
+      if(!this._isAlreadySorted()) {
+        if(this._sortIsInCurrentTest()) {
+          this.storage[this.name] = this._sortOneOption().name;
+        } else {
+          this.storage[this.name] = false;
+        }
+      }
+
+      if(!this.storage[this.name]) return;
+
+      var option = this._getCurrentOption();
+      this.selectedOption = option;
+
+      if(run && typeof run === 'function') {
+        run.call(this, option);
+      }
+
+      return this;
+    },
+
+    init: function(config) {
+      this.name = config.name;
+      this.percentage = config.percentage;
+      this.options = config.options;
+    },
+
+    convert: function() {
+      if(typeof ga !== 'function') {
+        console.error('You must have the ga script in your page');
+        return false;
+      }
+
+      ga('send', {
+        hitType: 'event',
+        eventCategory: 'googleAnalyticsAB',
+        eventAction: this.name,
+        eventLabel: this.selectedOption.name, // Aqui eu diferencio se clicou no A ou B
+        eventValue: 1,
+      });
+
+      return true;
+    },
+
+    _getCurrentOption: function() {
+      var alternativeName = this.storage[this.name];
+      for(var i=0, qt=this.options.length; i<qt; i++) {
+        var currentOption = this.options[i];
+        if(currentOption.name === alternativeName) {
+          return currentOption;
+        }
+      }
+    },
+
+    _isAlreadySorted: function() {
+      return !(typeof this.storage[this.name] === 'undefined');
+    },
+
+    _sortIsInCurrentTest: function() {
+      var sorted = this._randomBetween(0, 100);
+      return sorted < this.percentage;
+    },
+
     _randomBetween: function(min, max) {
       return Math.floor(Math.random() * max) + min;
     },
 
-    _sortOneOption: function(options) {
-      var total = options.reduce((op1, op2) => (
-        (op1.weight || 1) + (op2.weight || 1)
-      ));
-      var sorted = this._randomBetween(0, total);
+    _sortOneOption: function() {
+      var total = this.options.reduce(function(op1, op2) {
+        return (op1.weight || 1) + (op2.weight || 1)
+      });
 
-      for(var i=0,qt=options.length; i<qt; i++) {
-        sorted -= (options[i].weight || 1);
-        if(sorted <= 0) return options[i];
+      var sorted = this._randomBetween(1, total);
+
+      for(var i=0,qt=this.options.length; i<qt; i++) {
+        sorted -= (this.options[i].weight || 1);
+        if(sorted <= 0) return this.options[i];
       }
     }
   }
@@ -100,124 +96,3 @@ require = (function (modules, cache, entry) {
     window.googleAnalyticsAB = googleAnalyticsAB;
   }
 })();
-
-},{}],0:[function(require,module,exports) {
-var global = (1, eval)('this');
-var OldModule = module.bundle.Module;
-function Module() {
-  OldModule.call(this);
-  this.hot = {
-    accept: function (fn) {
-      this._acceptCallback = fn || function () {};
-    },
-    dispose: function (fn) {
-      this._disposeCallback = fn;
-    }
-  };
-}
-
-module.bundle.Module = Module;
-
-if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
-  var ws = new WebSocket('ws://' + window.location.hostname + ':57845/');
-  ws.onmessage = function(event) {
-    var data = JSON.parse(event.data);
-
-    if (data.type === 'update') {
-      data.assets.forEach(function (asset) {
-        hmrApply(global.require, asset);
-      });
-
-      data.assets.forEach(function (asset) {
-        if (!asset.isNew) {
-          hmrAccept(global.require, asset.id);
-        }
-      });
-    }
-
-    if (data.type === 'reload') {
-      ws.close();
-      ws.onclose = function () {
-        window.location.reload();
-      }
-    }
-
-    if (data.type === 'error-resolved') {
-      console.log('[parcel] ✨ Error resolved');
-    }
-
-    if (data.type === 'error') {
-      console.error('[parcel] 🚨  ' + data.error.message + '\n' + 'data.error.stack');
-    }
-  };
-}
-
-function getParents(bundle, id) {
-  var modules = bundle.modules;
-  if (!modules) {
-    return [];
-  }
-
-  var parents = [];
-  var k, d, dep;
-
-  for (k in modules) {
-    for (d in modules[k][1]) {
-      dep = modules[k][1][d];
-      if (dep === id || (Array.isArray(dep) && dep[dep.length - 1] === id)) {
-        parents.push(+k);
-      }
-    }
-  }
-
-  if (bundle.parent) {
-    parents = parents.concat(getParents(bundle.parent, id));
-  }
-
-  return parents;
-}
-
-function hmrApply(bundle, asset) {
-  var modules = bundle.modules;
-  if (!modules) {
-    return;
-  }
-
-  if (modules[asset.id] || !bundle.parent) {
-    var fn = new Function('require', 'module', 'exports', asset.generated.js);
-    asset.isNew = !modules[asset.id];
-    modules[asset.id] = [fn, asset.deps];
-  } else if (bundle.parent) {
-    hmrApply(bundle.parent, asset);
-  }
-}
-
-function hmrAccept(bundle, id) {
-  var modules = bundle.modules;
-  if (!modules) {
-    return;
-  }
-
-  if (!modules[id] && bundle.parent) {
-    return hmrAccept(bundle.parent, id);
-  }
-
-  var cached = bundle.cache[id];
-  if (cached && cached.hot._disposeCallback) {
-    cached.hot._disposeCallback();
-  }
-
-  delete bundle.cache[id];
-  bundle(id);
-
-  cached = bundle.cache[id];
-  if (cached && cached.hot && cached.hot._acceptCallback) {
-    cached.hot._acceptCallback();
-    return true;
-  }
-
-  return getParents(global.require, id).some(function (id) {
-    return hmrAccept(global.require, id)
-  });
-}
-},{}]},{},[0,4])

@@ -2,13 +2,9 @@
   var googleAnalyticsAB = {
     storage: typeof localStorage !== 'undefined' ? localStorage : {},
 
-    create: function({
-      name,
-      percentage,
-      options,
-      run,
-    }) {
+    create: function(config) {
       this.init(name, percentage, options);
+
       if(!this._isAlreadySorted()) {
         if(this._sortIsInCurrentTest()) {
           this.storage[this.name] = this._sortOneOption().name;
@@ -29,10 +25,10 @@
       return this;
     },
 
-    init: function(name, percentage, options) {
-      this.name = name;
-      this.percentage = percentage;
-      this.options = options;
+    init: function(config) {
+      this.name = config.name;
+      this.percentage = config.percentage;
+      this.options = config.options;
     },
 
     convert: function() {
@@ -76,9 +72,9 @@
     },
 
     _sortOneOption: function() {
-      var total = this.options.reduce((op1, op2) => (
-        (op1.weight || 1) + (op2.weight || 1)
-      ));
+      var total = this.options.reduce(function(op1, op2) {
+        return (op1.weight || 1) + (op2.weight || 1)
+      });
 
       var sorted = this._randomBetween(1, total);
 

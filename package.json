@@ -1,23 +1,22 @@
 {
   "name": "google-analytics-ab",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Function to create tests AB using analytics",
   "main": "index.js",
   "author": "Renato Cassino",
   "license": "MIT",
-  "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "webpack": "^3.10.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-uglify": "^3.0.0",
     "http-server": "^0.10.0",
     "mocha": "^4.1.0",
-    "sane": "^2.2.0"
+    "pump": "^2.0.0"
   },
   "scripts": {
     "start": "http-server",
-    "test": "mocha"
+    "test": "mocha",
+    "build": "gulp && mv dist/index.js dist/google-analytics-ab.min.js && cp index.js dist/google-analytics-ab.js"
   },
   "jest": {
     "moduleFileExtensions": [
