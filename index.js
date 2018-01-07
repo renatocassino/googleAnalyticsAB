@@ -6,6 +6,7 @@
       name,
       percentage,
       options,
+      run,
     }) {
       this.init(name, percentage, options);
       if(!this._isAlreadySorted()) {
@@ -19,8 +20,8 @@
       if(!this.storage[this.name]) return;
 
       var option = this._getCurrentOption();
-      if(option && typeof option.run === 'function') {
-        option.run();
+      if(run && typeof run === 'function') {
+        run(option);
       }
 
       return this;

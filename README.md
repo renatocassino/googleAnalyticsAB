@@ -21,20 +21,17 @@ $ npm i --save google-analytics-ab
       {
         name: 'green-button', // Name of your alternative
         weight: 1, // weight of your alternative (optional)
-        run: function() { // Method to run
-          document.getElementById('label').innerHTML = 'SIDE A';
-          document.getElementById('myButton').style.background = '#0F0';
-        }
       },
       {
         name: 'red-button',
-        weight: 1,
-        run: function() {
-          document.getElementById('label').innerHTML = 'SIDE B';
-          document.getElementById('myButton').style.background = '#F00';
-        }
+        weight: 1
       }
-    ]
+    ],
+
+    run: function(option) {
+      document.getElementById('label').innerHTML = `SIDE ${option.name}`;
+      document.getElementById('myButton').style.background = option.name === 'green-button' ? '#0F0' : '#F00';
+    }
   });
 
 ```
