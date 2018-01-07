@@ -3,7 +3,7 @@
     storage: typeof localStorage !== 'undefined' ? localStorage : {},
 
     create: function(config) {
-      this.init(name, percentage, options);
+      this.init(config);
 
       if(!this._isAlreadySorted()) {
         if(this._sortIsInCurrentTest()) {
@@ -18,8 +18,8 @@
       var option = this._getCurrentOption();
       this.selectedOption = option;
 
-      if(run && typeof run === 'function') {
-        run.call(this, option);
+      if(config.run && typeof config.run === 'function') {
+        config.run.call(this, option);
       }
 
       return this;
