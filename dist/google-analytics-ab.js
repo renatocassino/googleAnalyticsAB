@@ -16,6 +16,7 @@
       if(!this.storage[this.name]) return;
 
       var option = this._getCurrentOption();
+      option['convert'] = this.convert.bind(this);
       this.selectedOption = option;
 
       if(config.run && typeof config.run === 'function') {

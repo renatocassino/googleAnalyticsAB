@@ -28,8 +28,8 @@
         var myButton = document.getElementById('myButton');
         myButton.style.background = option.name === 'green-button' ? '#0F0' : '#F00';
         myButton.addEventListener('click', function(ev) {
-          this.convert();
-        }.bind(this));
+          option.convert();
+        });
       }
     });
   </script>

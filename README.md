@@ -44,8 +44,8 @@ You must have GA script in your page.
 
       // Event onClick in button tested
       myButton.addEventListener('click', function(ev) {
-        this.convert(); // Method to convert
-      }.bind(this)); // Bind this is important!
+        option.convert(); // Method to convert
+      });
     }
   });
 
