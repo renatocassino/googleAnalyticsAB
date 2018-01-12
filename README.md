@@ -1,6 +1,7 @@
 # Google Analytics AB
 
-[![Build Status](https://travis-ci.org/tacnoman/googleAnalyticsAB.svg?branch=master)](https://travis-ci.org/tacnoman/googleAnalyticsAB) [![Code Climate](https://codeclimate.com/github/tacnoman/googleAnalyticsAB/badges/gpa.svg)](https://codeclimate.com/github/tacnoman/googleAnalyticsAB)
+[![Build Status](https://travis-ci.org/tacnoman/googleAnalyticsAB.svg?branch=master)](https://travis-ci.org/tacnoman/googleAnalyticsAB) [![Code Climate](https://codeclimate.com/github/tacnoman/googleAnalyticsAB/badges/gpa.svg)](https://codeclimate.com/github/tacnoman/googleAnalyticsAB) [![HitCount](http://hits.dwyl.io/tacnoman/googleAnalyticsAB.svg)](http://hits.dwyl.io/tacnoman/googleAnalyticsAB)
+
 
 Lib tool in javascript to create A/B tests using Google Analytics events in easy way. With a simple configuration you can edit your page and get metrics.
 
