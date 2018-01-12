@@ -1,6 +1,6 @@
 # Google Analytics AB
 
-[![Build Status](https://travis-ci.org/tacnoman/googleAnalyticsAB.svg?branch=master)](https://travis-ci.org/tacnoman/googleAnalyticsAB)
+[![Build Status](https://travis-ci.org/tacnoman/googleAnalyticsAB.svg?branch=master)](https://travis-ci.org/tacnoman/googleAnalyticsAB) [![Code Climate](https://codeclimate.com/github/tacnoman/googleAnalyticsAB/badges/gpa.svg)](https://codeclimate.com/github/tacnoman/googleAnalyticsAB)
 
 ## Getting started
 
