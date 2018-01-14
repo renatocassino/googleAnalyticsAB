@@ -53,17 +53,17 @@ To make a simple test, you can call:
   # Example of AB change button color. Green or Red.
   googleAnalyticsAB.create({
     name: 'MY_TEST', // Name of your first test
-    percentage: 80, // Percentage of users to run in this test
+    percentage: 80, // Percentage of users to run in this test (Default is 80)
 
     // Alternatives
     options: [
       {
         name: 'green-button', // Name of your alternative
-        weight: 1, // weight of your alternative (optional)
+        weight: 1, // weight of your alternative (optional, default is 1)
       },
       {
         name: 'red-button',
-        weight: 1
+        weight: 1,
       }
     ],
 
