@@ -80,3 +80,31 @@ To make a simple test, you can call:
   });
 
 ```
+
+## How to see the results
+
+Open your Google Analytics account and go to:
+
+`Behavior > Events > Overview`
+
+In Event category, go to `googleAnalyticsAB`.
+
+Click in `Event Action`.
+
+<img src="https://raw.githubusercontent.com/tacnoman/googleAnalyticsAb/master/images/top-events-analytics-01.jpg" alt="logo" title="Event action">
+
+Now, you will see all A/B tests running.
+Click in your current A/B test.
+
+Now, you will see your options, check all and click in `Plot rows`.
+
+<img src="https://raw.githubusercontent.com/tacnoman/googleAnalyticsAb/master/images/top-events-analytics-02.jpg" alt="logo" title="Analytics plot lines">
+
+See your test result :D
+
+<img src="https://raw.githubusercontent.com/tacnoman/googleAnalyticsAb/master/images/top-events-analytics-03.jpg" alt="logo" title="Analytics result">
+
+
+Ps: If you cannot see the events, you need change the date and add the current day.
+
+Bugs? Tacnoman `<renatocassino@gmail.com>`.
