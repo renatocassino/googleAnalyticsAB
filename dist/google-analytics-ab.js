@@ -28,8 +28,12 @@
 
     init: function(config) {
       this.name = config.name;
-      this.percentage = config.percentage;
-      this.options = config.options;
+      this.percentage = config.percentage || 80;
+      this.options = config.options.map(function(option) {
+        return Object.assign({}, {
+          weight: 1
+        }, option);
+      });
     },
 
     convert: function() {
@@ -74,13 +78,13 @@
 
     _sortOneOption: function() {
       var total = this.options.reduce(function(op1, op2) {
-        return (op1.weight || 1) + (op2.weight || 1)
+        return op1.weight + op2.weight;
       });
 
       var sorted = this._randomBetween(1, total);
 
       for(var i=0,qt=this.options.length; i<qt; i++) {
-        sorted -= (this.options[i].weight || 1);
+        sorted -= this.options[i].weight;
         if(sorted <= 0) return this.options[i];
       }
     }

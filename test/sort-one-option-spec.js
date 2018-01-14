@@ -50,7 +50,8 @@ describe('#sortOneOption', () => {
   });
 
   it('should select options with empty weight param', () => {
-    googleAnalyticsAB.options = [{name: 'a'}, {name: 'b'}];
+    var options = [{name: 'a'}, {name: 'b'}];
+    googleAnalyticsAB.init({ name: '123', percentage: 100, options: options });
     googleAnalyticsAB._randomBetween = function(a, b) { return 1 };
     assert.equal(googleAnalyticsAB._sortOneOption().name, 'a');
   });
