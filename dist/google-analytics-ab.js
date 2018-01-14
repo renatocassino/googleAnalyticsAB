@@ -1,3 +1,10 @@
+
+/*!
+  Copyright (c) 2018 Tacnoman.
+  Licensed under the MIT License (MIT), see
+  https://github.com/tacnoman/googleAnalyticsAb
+*/
+/* global define */
 (function() {
   var googleAnalyticsAB = {
     storage: typeof localStorage !== 'undefined' ? localStorage : {},
@@ -88,7 +95,7 @@
         if(sorted <= 0) return this.options[i];
       }
     }
-  }
+  };
 
   if (typeof define === 'function' && define.amd) {
     // AMD

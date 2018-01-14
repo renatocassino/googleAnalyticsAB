@@ -4,7 +4,13 @@
   "description": "Function to create tests AB using analytics",
   "main": "index.js",
   "author": "Tacnoman - Renato Cassino",
-  "keywords": ["google", "analytics", "ab", "test", "javascript"],
+  "keywords": [
+    "google",
+    "analytics",
+    "ab",
+    "test",
+    "javascript"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/tacnoman/googleAnalyticsAB.git"
@@ -12,6 +18,8 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
+    "eslint": "^4.15.0",
+    "eslint-config-google": "^0.9.1",
     "gulp": "^3.9.1",
     "gulp-uglify": "^3.0.0",
     "http-server": "^0.10.0",
@@ -21,7 +29,8 @@
   "scripts": {
     "start": "http-server",
     "test": "mocha",
-    "build": "gulp && mv dist/index.js dist/google-analytics-ab.min.js && cp index.js dist/google-analytics-ab.js"
+    "build": "gulp && mv dist/index.js dist/google-analytics-ab.min.js && cp index.js dist/google-analytics-ab.js",
+    "lint": "eslint index.js"
   },
   "jest": {
     "moduleFileExtensions": [

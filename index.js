@@ -95,7 +95,7 @@
         if(sorted <= 0) return this.options[i];
       }
     }
-  }
+  };
 
   if (typeof define === 'function' && define.amd) {
     // AMD
