@@ -44,7 +44,7 @@ You must have GA script in your page.
 To make a simple test, you can call:
 ```html
 .....
-<script src="https://rawgit.com/tacnoman/googleAnalyticsAB/master/dist/google-analytics-ab.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/google-analytics-ab@latest/dist/google-analytics-ab.min.js"></script>
 .....
 ```
 
