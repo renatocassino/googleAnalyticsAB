@@ -23,12 +23,13 @@
     "gulp": "^3.9.1",
     "gulp-uglify": "^3.0.0",
     "http-server": "^0.10.0",
+    "jscoverage": "^0.6.0",
     "mocha": "^4.1.0",
     "pump": "^2.0.0"
   },
   "scripts": {
     "start": "http-server",
-    "test": "mocha",
+    "test": "mocha -r jscoverage --covout=html test/",
     "build": "gulp && mv dist/index.js dist/google-analytics-ab.min.js && cp index.js dist/google-analytics-ab.js",
     "lint": "eslint index.js"
   },
