@@ -1,6 +1,6 @@
 # Google Analytics AB
 
-[![Version](http://img.shields.io/npm/v/google-analytics-ab.svg)](https://www.npmjs.org/package/google-analytics-ab) [![Build Status](https://travis-ci.org/tacnoman/googleAnalyticsAB.svg?branch=master)](https://travis-ci.org/tacnoman/googleAnalyticsAB) [![Code Climate](https://codeclimate.com/github/tacnoman/googleAnalyticsAB/badges/gpa.svg)](https://codeclimate.com/github/tacnoman/googleAnalyticsAB) [![HitCount](http://hits.dwyl.io/tacnoman/googleAnalyticsAB.svg)](http://hits.dwyl.io/tacnoman/googleAnalyticsAB)
+[![Version](http://img.shields.io/npm/v/google-analytics-ab.svg)](https://www.npmjs.org/package/google-analytics-ab) [![Build Status](https://travis-ci.org/tacnoman/googleAnalyticsAB.svg?branch=master)](https://travis-ci.org/tacnoman/googleAnalyticsAB) [![codecov](https://codecov.io/gh/tacnoman/googleAnalyticsAB/branch/master/graph/badge.svg)](https://codecov.io/gh/tacnoman/googleAnalyticsAB) [![Code Climate](https://codeclimate.com/github/tacnoman/googleAnalyticsAB/badges/gpa.svg)](https://codeclimate.com/github/tacnoman/googleAnalyticsAB) [![HitCount](http://hits.dwyl.io/tacnoman/googleAnalyticsAB.svg)](http://hits.dwyl.io/tacnoman/googleAnalyticsAB)
 
 
 Lib tool in javascript to create A/B tests using Google Analytics events in easy way. With a simple configuration you can edit your page and get metrics.
