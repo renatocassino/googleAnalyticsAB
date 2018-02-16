@@ -19,7 +19,7 @@ And use require to get the lib.
 ```js
 var googleAnalyticsAB = require('googleAnalyticsAB');
 
-# Or with ecma6
+// Or with ecma6
 
 import googleAnalyticsAB from 'googleAnalyticsAB'
 ```
@@ -35,7 +35,7 @@ You can get in folder dist the compressed file (`/dist/google-analytics-ab.min.j
 
 ## Dependencies
 
-- Google Analytics script (obvios?)
+- Google Analytics script (obvious?)
 
 ## Create your own first test
 
@@ -50,7 +50,7 @@ To make a simple test, you can call:
 
 ```js
 
-  # Example of AB change button color. Green or Red.
+  // Example of AB change button color. Green or Red.
   googleAnalyticsAB.create({
     name: 'MY_TEST', // Name of your first test
     percentage: 80, // Percentage of users to run in this test (Default is 80)
