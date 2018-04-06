@@ -30,6 +30,7 @@
         config.run.call(this, option);
       }
 
+      this.registerPageViewEvent();
       return this;
     },
 
@@ -49,15 +50,23 @@
         return false;
       }
 
-      ga('send', {
-        hitType: 'event',
-        eventCategory: 'googleAnalyticsAB',
-        eventAction: this.name,
-        eventLabel: this.selectedOption.name, // Aqui eu diferencio se clicou no A ou B
-        eventValue: 1,
-      });
+      this.sendEvent('convert');
 
       return true;
+    },
+
+    sendEvent: function(action) {
+      ga('send', {
+        hitType: 'event',
+        eventCategory: 'googleAnalyticsAB-' + this.name,
+        eventAction: action,
+        eventLabel: this.selectedOption.name,
+        eventValue: 1,
+      });
+    },
+
+    registerPageViewEvent: function() {
+      this.sendEvent('view');
     },
 
     _getCurrentOption: function() {
